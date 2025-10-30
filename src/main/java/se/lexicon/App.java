@@ -1,5 +1,5 @@
 package se.lexicon;
-
+import se.lexicon.model.Book;
 
 public class App {
     public static void main(String[] args) {
@@ -7,6 +7,8 @@ public class App {
 
         // Create a book instance
         // Display book information
+        Book book1 = new Book("War and Peace", "Leo Tolstoi");
+        System.out.println(book1.getBookInformation());
 
         // Create a person instance
         // Display person information
