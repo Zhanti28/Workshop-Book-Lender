@@ -41,4 +41,8 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getPersonalInformation() {
+        return "User Id: " + id + " " + firstName + " " + lastName;
+    }
 }
