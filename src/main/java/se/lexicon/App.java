@@ -37,7 +37,7 @@ public class App {
         boolean running = true;
 
         while (running) {
-            System.out.println("--- MENU ---");
+            System.out.println("\n--- MENU ---");
             System.out.println("1. Show all books");
             System.out.println("2. Borrow a book");
             System.out.println("3. Return a book");
