@@ -1,48 +1,69 @@
 package se.lexicon.model;
+import java.util.ArrayList;
 
 public class Person {
-    // todo: needs completion
+    private static int sequencer = 0;
     private int id;
     private String firstName;
     private String lastName;
+    private ArrayList<Book> borrowedBooks;
 
-
-
-
-    public Person(int id, String firstName, String lastName) {
-        setId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
+    //Create a person
+    public Person(String firstName, String lastName) {
+        this.id = getNextId();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.borrowedBooks = new ArrayList<>();
     }
 
-    //Id
+    private static int getNextId() {
+        return ++sequencer;
+    }
+
+    // Borrow a book
+    public void loanBook(Book book) {
+        if (book.isAvailable()) {
+            borrowedBooks.add(book);
+            book.setBorrower(this);
+            System.out.println(firstName + " borrowed \"" + book.getTitle() + "\"");
+        } else {
+            System.out.println("Sorry, \"" + book.getTitle() + "\" is already borrowed.");
+        }
+    }
+
+    // Return a book
+    public void returnBook(Book book) {
+        if (borrowedBooks.remove(book)) {
+            book.setBorrower(null);
+            System.out.println(firstName + " returned \"" + book.getTitle() + "\"");
+        } else {
+            System.out.println("You don't have this book to return.");
+        }
+    }
+
+    // Info about the person
+    public String getPersonInformation() {
+        String info = "Person ID: " + id + "\nName: " + firstName + " " + lastName + "\nBorrowed books:";
+        if (borrowedBooks.isEmpty()) {
+            info += " None";
+        } else {
+            for (Book book : borrowedBooks) {
+                info += "\n - " + book.getTitle();
+            }
+        }
+        return info;
+    }
+
+    // Getters
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    //first name
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    //last name
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPersonalInformation() {
-        return "User Id: " + id + " " + firstName + " " + lastName;
     }
 }
